@@ -1,0 +1,476 @@
+:root {
+  /* Colors */
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --secondary: #10b981;
+  --secondary-light: #34d399;
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
+  --danger: #ef4444;
+  --danger-light: #f87171;
+  --dark: #1e293b;
+  --darker: #0f172a;
+  --light: #f8fafc;
+  --lighter: #ffffff;
+  --gray: #94a3b8;
+  --gray-light: #e2e8f0;
+  --gray-lighter: #f1f5f9;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Transitions */
+  --transition: all 0.2s ease-in-out;
+}
+
+/* Base styles */
+.habits-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  color: var(--dark);
+}
+
+.habits-header {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.habits-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  color: var(--darker);
+}
+
+.habits-header p {
+  color: var(--gray);
+  font-size: 1.1rem;
+}
+
+/* Error message */
+.error-message {
+  background-color: var(--danger-light);
+  color: var(--darker);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Add habit form */
+.add-habit-section {
+  background-color: var(--lighter);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow);
+}
+
+.add-habit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.form-group {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.add-habit-input {
+  flex: 1;
+  padding: var(--spacing-md);
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.add-habit-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.add-habit-select {
+  padding: var(--spacing-md);
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  background-color: var(--lighter);
+  transition: var(--transition);
+}
+
+.add-habit-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.add-habit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary);
+  color: var(--lighter);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-habit-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.add-habit-btn:disabled {
+  background-color: var(--gray-light);
+  cursor: not-allowed;
+}
+
+.add-habit-btn .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Tabs */
+.habits-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-sm);
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent;
+  color: var(--gray);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.tab-btn:hover {
+  background-color: var(--gray-lighter);
+  color: var(--dark);
+}
+
+.tab-btn.active {
+  background-color: var(--primary);
+  color: var(--lighter);
+}
+
+/* Habits list */
+.habits-list-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) 0;
+  color: var(--gray);
+}
+
+.loading-state .spinner {
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  color: var(--gray);
+}
+
+.empty-state-icon {
+  margin-bottom: var(--spacing-md);
+  color: var(--gray-light);
+}
+
+.habits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Habit card */
+.habit-card {
+  background-color: var(--lighter);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--gray-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.habit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.habit-card.checked-in {
+  border-left: 4px solid var(--secondary);
+}
+
+.habit-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.habit-info {
+  flex: 1;
+}
+
+.habit-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--darker);
+}
+
+.habit-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+.habit-frequency {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.habit-frequency.daily {
+  color: var(--primary);
+}
+
+.habit-frequency.weekly {
+  color: var(--accent);
+}
+
+.habit-streak {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--secondary);
+}
+
+.chevron-icon {
+  color: var(--gray-light);
+  transition: var(--transition);
+}
+
+.habit-card:hover .chevron-icon {
+  color: var(--gray);
+}
+
+.habit-card-body {
+  margin-bottom: var(--spacing-lg);
+}
+
+.last-checkin {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-bottom: var(--spacing-md);
+}
+
+.checkin-date {
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.progress-indicator {
+  height: 6px;
+  background-color: var(--gray-lighter);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--secondary);
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+/* Card actions */
+.habit-card-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+}
+
+.checkin-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--gray-lighter);
+  color: var(--dark);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.checkin-btn:hover {
+  background-color: var(--gray-light);
+}
+
+.checkin-btn.checked {
+  background-color: var(--secondary-light);
+  color: var(--darker);
+}
+
+.checkin-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.checkin-btn .spinner {
+  animation: spin 1s linear infinite;
+}
+
+.delete-habit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  background-color: transparent;
+  color: var(--gray);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.delete-habit-btn:hover {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+/* Stats section */
+.habits-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.stat-card {
+  background-color: var(--lighter);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.stat-card svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: var(--spacing-sm);
+  background-color: var(--gray-lighter);
+  border-radius: var(--radius-full);
+  color: var(--primary);
+}
+
+.stat-card h3 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-card p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--darker);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .habits-page-container {
+    padding: var(--spacing-md);
+  }
+
+  .form-group {
+    flex-direction: column;
+  }
+
+  .habits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .habits-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .habits-header p {
+    font-size: 1rem;
+  }
+
+  .add-habit-section {
+    padding: var(--spacing-md);
+  }
+
+  .habit-card {
+    padding: var(--spacing-md);
+  }
+}
